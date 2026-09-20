@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Motion — Diseño y desarrollo web</title>
+<meta name="description" content="Apex Motion diseña y construye tu sitio web, bloque a bloque. Planes claros, extras a la medida y presupuesto al instante por WhatsApp.">
+
+<!-- Tipografías: puedes quitar este link y usar solo fuentes del sistema si prefieres no depender de internet -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   VARIABLES DE PERSONALIZACIÓN
+   Cambia aquí colores, tipografías, radios de borde y sombras. Todo el
+   documento usa estas variables, así que un cambio aquí se aplica a
+   toda la página. Paleta oficial de Apex Motion.
+   ========================================================================= */
+html{ scroll-behavior: smooth; }
+
+:root{
+  /* --- Paleta oficial Apex Motion (Coolors) --- */
+  --primary-color:   #000000;  /* Color principal: fondo oscuro principal / texto */
+  --secondary-color: #14213d;  /* Color secundario: tarjetas, secciones secundarias, contenedores */
+  --accent-color:    #0a9396;  /* Accent: botones principales, íconos y destacados */
+  --bg-color:        #001219;  /* Fondo general de la página */
+
+  /* Variantes derivadas del accent, para hover y detalles claros */
+  --accent-color-dark:  #07686a;
+  --accent-color-light: #3fb6b8;
+
+  /* --- Texto: siempre blanco o gris claro sobre estos fondos oscuros --- */
+  --text-strong: #ffffff;
+  --text-soft:   #e5e5e5;
+  --text-muted:  rgba(229,229,229,.62);
+
+  /* --- Bordes y líneas sobre fondo oscuro --- */
+  --color-line: rgba(255,255,255,.12);
+  --color-line-soft: rgba(255,255,255,.08);
+
+  /* --- Tipografías ---
+     font-family: usa esta para cuerpo de texto general.
+     font-family-display: usa esta para titulares grandes.
+     font-family-mono: usa esta para precios y etiquetas tipo "ficha técnica". */
+  --font-family:         'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-family-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-family-mono:    'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+
+  /* --- Geometría --- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.35);
+  --shadow-md: 0 18px 44px rgba(0,0,0,.5);
+  --container-w: 1160px;
+}
+
+/* =========================================================================
+   BASE
+   ========================================================================= */
+*, *::before, *::after{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family: var(--font-family);
+  color: var(--text-soft);
+  background: var(--bg-color);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; text-decoration: none; }
+h1,h2,h3,h4{ font-family: var(--font-family-display); margin:0; line-height:1.15; font-weight:600; color: var(--text-strong); }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+button, input, textarea{ font-family: inherit; }
+:focus-visible{ outline: 2px solid var(--accent-color-light); outline-offset: 3px; }
+
+.container{
+  width:100%;
+  max-width: var(--container-w);
+  margin:0 auto;
+  padding: 0 24px;
+}
+section{ padding: 92px 0; }
+@media (max-width: 640px){ section{ padding: 64px 0; } }
+
+.eyebrow-label{
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  color: var(--accent-color-light);
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.section-head{
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+.section-head h2{
+  font-size: clamp(28px, 3.4vw, 38px);
+  margin-top: 10px;
+}
+.section-head p{
+  color: var(--text-muted);
+  font-size: 17px;
+  margin-top: 14px;
+  max-width: 52ch;
+}
+
+/* Botones */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: 14px 26px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease;
+  white-space: nowrap;
+}
+.btn:active{ transform: translateY(1px); }
+.btn-primary{
+  background: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(10,147,150,.35);
+}
+.btn-primary:hover{
+  background: var(--accent-color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(10,147,150,.4);
+}
+.btn-dark{
+  background: var(--primary-color);
+  color:#fff;
+  border-color: var(--color-line);
+}
+.btn-dark:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-outline{
+  background: transparent;
+  border-color: var(--color-line);
+  color: var(--text-strong);
+}
+.btn-outline:hover{
+  border-color: var(--accent-color-light);
+  transform: translateY(-2px);
+}
+.btn-block{ width:100%; }
+.btn-sm{ padding: 10px 16px; font-size: 14px; }
+
+/* =========================================================================
+   HEADER
+   ========================================================================= */
+.site-header{
+  position: sticky;
+  top:0;
+  z-index: 100;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--color-line);
+}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 16px 0;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text-strong);
+}
+.logo-mark{
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 4px;
+  position:relative;
+  flex-shrink:0;
+}
+.logo-mark::after{
+  content:"";
+  position:absolute;
+  right:-6px; bottom:-6px;
+  width: 16px; height:16px;
+  background: var(--accent-color-light);
+  border-radius: 4px;
+  opacity:.55;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap: 32px;
+}
+.nav-links a{
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color .15s ease;
+}
+.nav-links a:hover{ color: var(--text-strong); }
+.nav-actions{ display:flex; align-items:center; gap:18px; }
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+}
+.nav-toggle span{
+  display:block;
+  width:22px;
+  height:2px;
+  background: var(--text-strong);
+  margin: 5px 0;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.mobile-panel{ display:none; }
+
+@media (max-width: 860px){
+  .nav-links{ display:none; }
+  .nav-actions .btn{ display:none; }
+  .nav-toggle{ display:block; }
+  .mobile-panel{
+    display:none;
+    flex-direction:column;
+    gap: 4px;
+    padding: 8px 0 20px;
+    border-top: 1px solid var(--color-line);
+  }
+  .mobile-panel.open{ display:flex; }
+  .mobile-panel a{
+    padding: 12px 4px;
+    font-weight:500;
+    color: var(--text-soft);
+    border-bottom: 1px solid var(--color-line-soft);
+  }
+  .mobile-panel .btn{ margin-top: 12px; }
+}
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+.hero{
+  padding: 76px 0 100px;
+  overflow: hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 60px;
+  align-items:center;
+}
+.hero-copy h1{
+  font-size: clamp(34px, 5vw, 56px);
+  letter-spacing: -0.01em;
+}
+.hero-copy .accent-word{ color: var(--accent-color-light); }
+.hero-copy p{
+  margin-top: 20px;
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 46ch;
+}
+.hero-actions{
+  display:flex;
+  gap: 14px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.hero-meta{
+  display:flex;
+  gap: 28px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+}
+.hero-meta div{ min-width: 110px; }
+.hero-meta strong{
+  display:block;
+  font-family: var(--font-family-mono);
+  font-size: 24px;
+  color: var(--text-strong);
+}
+.hero-meta span{
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Mockup de navegador con bloques que se ensamblan */
+.browser-mock{
+  background: var(--secondary-color);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.browser-bar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-line);
+}
+.browser-dot{ width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,.25); }
+.browser-url{
+  margin-left: 10px;
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(0,0,0,.35);
+  padding: 5px 12px;
+  border-radius: 6px;
+  flex:1;
+}
+.browser-body{
+  padding: 22px;
+  display:grid;
+  gap: 14px;
+}
+.blk{
+  background: rgba(255,255,255,.06);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: blkIn .6s ease forwards;
+  border: 1px solid var(--color-line-soft);
+}
+.blk-nav{ height: 20px; width: 40%; animation-delay: .1s; }
+.blk-hero{ height: 92px; animation-delay: .35s; background: linear-gradient(135deg, rgba(10,147,150,.35), rgba(63,182,184,.15)); }
+.blk-row{ display:flex; gap:14px; }
+.blk-card{ height: 64px; flex:1; animation-delay: .6s; }
+.blk-card:nth-child(2){ animation-delay: .75s; }
+.blk-card:nth-child(3){ animation-delay: .9s; }
+.blk-line{ height: 10px; border-radius: 5px; animation-delay: 1.05s; }
+.blk-line.w-80{ width: 80%; }
+.blk-line.w-55{ width: 55%; animation-delay: 1.15s; }
+
+@keyframes blkIn{
+  to{ opacity:1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .blk{ animation: none; opacity:1; transform:none; }
+}
+
+@media (max-width: 980px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .hero{ padding-top: 44px; }
+}
+
+/* =========================================================================
+   SERVICIOS / CÓMO TRABAJAMOS
+   ========================================================================= */
+#servicios{ background: var(--primary-color); }
+.steps-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.step-card{
+  background: var(--secondary-color);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+}
+.step-card h4{ font-size: 16px; }
+.step-card p{ font-size: 14px; color: var(--text-muted); margin-top: 10px; }
+
+@media (max-width: 900px){
+  .steps-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  .steps-grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   PLANES / PRECIOS
+   ========================================================================= */
+#planes{ border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+.plans-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+.plan-card{
+  background: var(--secondary-color);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display:flex;
+  flex-direction:column;
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  position:relative;
+}
+.plan-card:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-color-light);
+}
+.plan-card.is-featured{
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-md);
+}
+.plan-card.is-selected{
+  border-color: var(--accent-color-light);
+  box-shadow: 0 0 0 3px rgba(63,182,184,.22);
+}
+.plan-badge{
+  position:absolute;
+  top: -13px;
+  left: 28px;
+  background: var(--accent-color);
+  color:#fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.plan-name{ font-size: 21px; }
+.plan-tagline{
+  color: var(--text-muted);
+  font-size: 14.5px;
+  margin-top: 8px;
+  min-height: 42px;
+}
+.plan-price{
+  margin-top: 22px;
+  display:flex;
+  align-items:baseline;
+  gap: 6px;
+  font-family: var(--font-family-mono);
+}
+.plan-price .amount{ font-size: 38px; font-weight: 600; color: var(--text-strong); }
+.plan-price .unit{ font-size: 14px; color: var(--text-muted); }
+.plan-features{
+  margin-top: 24px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+  flex:1;
+}
+.plan-features li{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--text-soft);
+}
+.plan-features svg{ flex-shrink:0; margin-top:2px; color: var(--accent-color-light); }
+.plan-select{ margin-top: 28px; }
+.plan-select .btn.is-selected-state{
+  background: var(--accent-color-dark);
+  box-shadow:none;
+}
+
+@media (max-width: 940px){
+  .plans-grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   EXTRAS
+   ========================================================================= */
+.extras-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.extra-card{
+  display:flex;
+  align-items:center;
+  gap: 16px;
+  background: var(--secondary-color);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  cursor:pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.extra-card:hover{ border-color: var(--accent-color-light); }
+.extra-card.is-checked{
+  border-color: var(--accent-color);
+  background: rgba(10,147,150,.12);
+}
+.extra-checkbox{
+  width: 20px; height:20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--color-line);
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.extra-card.is-checked .extra-checkbox{
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+.extra-checkbox svg{ opacity:0; transform: scale(.6); transition: all .12s ease; color:#fff; }
+.extra-card.is-checked .extra-checkbox svg{ opacity:1; transform: scale(1); }
+.extra-card input{ position:absolute; opacity:0; pointer-events:none; }
+.extra-info{ flex:1; }
+.extra-name{ font-weight: 600; font-size: 15px; color: var(--text-strong); }
+.extra-desc{ font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+.extra-price{
+  font-family: var(--font-family-mono);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-strong);
+  white-space: nowrap;
+  text-align: right;
+}
+.extra-price small{ font-weight:500; color: var(--text-muted); font-size:11px; }
+
+@media (max-width: 700px){
+  .extras-grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   RESUMEN DEL PEDIDO
+   ========================================================================= */
+.summary-wrap{
+  display:grid;
+  grid-template-columns: 1fr;
+  margin-top: 40px;
+}
+.summary-card{
+  background: var(--primary-color);
+  color: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display:grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 32px;
+}
+.summary-title{
+  font-size: 13px;
+  font-family: var(--font-family-mono);
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+#summary-lines{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+.summary-line{
+  display:flex;
+  justify-content:space-between;
+  gap: 12px;
+  font-size: 14.5px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--color-line);
+}
+.summary-line .lbl{ color: var(--text-soft); }
+.summary-line .val{ font-family: var(--font-family-mono); color: var(--text-strong); }
+.summary-empty{
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.summary-totals{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap: 16px;
+  border-left: 1px solid var(--color-line);
+  padding-left: 32px;
+}
+.total-row{ display:flex; flex-direction:column; gap: 4px; }
+.total-row .lbl{ font-size: 13px; color: var(--text-muted); }
+.total-row .val{
+  font-family: var(--font-family-mono);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+.total-row.monthly .val{ font-size: 20px; color: var(--accent-color-light); }
+.summary-card .btn{ margin-top: 6px; }
+
+@media (max-width: 800px){
+  .summary-card{ grid-template-columns: 1fr; padding: 26px; }
+  .summary-totals{ border-left:none; border-top: 1px solid var(--color-line); padding-left:0; padding-top: 24px; }
+}
+
+/* =========================================================================
+   CONTACTO / COTIZACIÓN
+   ========================================================================= */
+#contacto{ background: var(--primary-color); border-top: 1px solid var(--color-line); }
+.contact-grid{
+  display:grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 52px;
+}
+.contact-side h3{ font-size: 22px; }
+.contact-side p{ color: var(--text-muted); margin-top: 14px; max-width: 40ch; }
+.contact-points{ margin-top: 28px; display:flex; flex-direction:column; gap: 16px; }
+.contact-point{ display:flex; gap:12px; align-items:flex-start; font-size: 14.5px; color: var(--text-soft); }
+.contact-point svg{ color: var(--accent-color-light); flex-shrink:0; margin-top:2px; }
+
+.form-card{
+  background: var(--secondary-color);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+.form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field{ margin-bottom: 18px; }
+.field label{
+  display:block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: var(--text-muted);
+}
+.field input, .field textarea{
+  width:100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line);
+  background: rgba(0,0,0,.35);
+  font-size: 14.5px;
+  color: var(--text-strong);
+  resize: vertical;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.field input::placeholder, .field textarea::placeholder{ color: var(--text-muted); }
+.field input:focus, .field textarea:focus{
+  border-color: var(--accent-color-light);
+  background: rgba(0,0,0,.5);
+  outline: none;
+}
+.form-actions{
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.form-note{
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+@media (max-width: 900px){
+  .contact-grid{ grid-template-columns: 1fr; }
+  .form-row{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.site-footer{
+  background: #000000;
+  color: var(--text-muted);
+  padding: 56px 0 28px;
+  border-top: 1px solid var(--color-line);
+}
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--color-line);
+}
+.footer-brand .logo{ color:#fff; }
+.footer-brand p{
+  margin-top: 14px;
+  max-width: 34ch;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.footer-links{ display:flex; gap: 60px; flex-wrap: wrap; }
+.footer-col h4{
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-family-mono);
+  margin-bottom: 14px;
+}
+.footer-col ul{ display:flex; flex-direction:column; gap: 10px; }
+.footer-col a{ font-size: 14px; color: var(--text-soft); transition: color .15s ease; }
+.footer-col a:hover{ color: var(--accent-color-light); }
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Toast de confirmación */
+#toast{
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--accent-color);
+  color:#fff;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events:none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 200;
+}
+#toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- =========================================================================
+     HEADER
+     ========================================================================= -->
+<header class="site-header">
+  <div class="container nav">
+    <a href="#top" class="logo"><span class="logo-mark"></span>Apex Motion</a>
+
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="#extras">Extras</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="#planes" class="btn btn-primary btn-sm">Solicitar Web</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="container mobile-panel" id="mobilePanel">
+    <a href="#servicios">Servicios</a>
+    <a href="#planes">Planes</a>
+    <a href="#extras">Extras</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#planes" class="btn btn-primary btn-block">Solicitar Web</a>
+  </div>
+</header>
+
+<!-- =========================================================================
+     HERO
+     ========================================================================= -->
+<div id="top"></div>
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow-label">Diseño &amp; desarrollo web</span>
+      <h1>Apex Motion construye tu sitio, <span class="accent-word">bloque a bloque</span>.</h1>
+      <p>Planificamos, diseñamos y programamos sitios a medida para negocios que quieren verse serios en internet, sin procesos eternos ni presupuestos confusos.</p>
+      <div class="hero-actions">
+        <a href="#planes" class="btn btn-primary">Ver planes y precios</a>
+        <a href="#servicios" class="btn btn-outline">Cómo trabajamos</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>+120</strong><span>proyectos entregados</span></div>
+        <div><strong>10–20</strong><span>días de entrega</span></div>
+        <div><strong>4.9/5</strong><span>satisfacción de clientes</span></div>
+      </div>
+    </div>
+
+    <div class="browser-mock" aria-hidden="true">
+      <div class="browser-bar">
+        <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+        <span class="browser-url">tunegocio.com</span>
+      </div>
+      <div class="browser-body">
+        <div class="blk blk-nav"></div>
+        <div class="blk blk-hero"></div>
+        <div class="blk-row">
+          <div class="blk blk-card"></div>
+          <div class="blk blk-card"></div>
+          <div class="blk blk-card"></div>
+        </div>
+        <div class="blk blk-line w-80"></div>
+        <div class="blk blk-line w-55"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     SERVICIOS / CÓMO TRABAJAMOS
+     ========================================================================= -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow-label">Cómo trabajamos</span>
+      <h2>Un proceso claro, de la idea al sitio publicado</h2>
+      <p>Sin vueltas: hablamos de tu negocio, elegimos un plan, sumamos lo que necesites y en pocas semanas tu sitio está en línea.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <h4>Conversamos</h4>
+        <p>Entendemos tu negocio, tu público y qué necesita tu sitio para funcionar.</p>
+      </div>
+      <div class="step-card">
+        <h4>Diseñamos</h4>
+        <p>Proponemos una identidad visual y estructura de página a tu medida.</p>
+      </div>
+      <div class="step-card">
+        <h4>Programamos</h4>
+        <p>Construimos el sitio, rápido, responsivo y listo para crecer.</p>
+      </div>
+      <div class="step-card">
+        <h4>Publicamos</h4>
+        <p>Configuramos dominio y hosting, y dejamos tu sitio funcionando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     PLANES
+     ========================================================================= -->
+<section id="planes">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow-label">Planes</span>
+      <h2>Elige el punto de partida para tu proyecto</h2>
+      <p>Precios base claros. Después puedes sumar los extras que tu proyecto necesite y ver el total al instante.</p>
+    </div>
+    <div class="plans-grid" id="plansGrid"><!-- Generado por JavaScript a partir de PLANS --></div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     EXTRAS + RESUMEN
+     ========================================================================= -->
+<section id="extras">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow-label">Complementos</span>
+      <h2>Suma lo que tu proyecto necesite</h2>
+      <p>Marca los extras que quieras incluir. El resumen de abajo se actualiza solo, con el total en tiempo real.</p>
+    </div>
+
+    <div class="extras-grid" id="extrasGrid"><!-- Generado por JavaScript a partir de EXTRAS --></div>
+
+    <div class="summary-wrap">
+      <div class="summary-card">
+        <div>
+          <div class="summary-title">RESUMEN DEL PEDIDO</div>
+          <div id="summary-lines">
+            <p class="summary-empty">Elige un plan arriba para comenzar tu resumen.</p>
+          </div>
+        </div>
+        <div class="summary-totals">
+          <div class="total-row">
+            <span class="lbl">Pago único</span>
+            <span class="val" id="totalOnce">$0</span>
+          </div>
+          <div class="total-row monthly" id="totalMonthlyRow" style="display:none;">
+            <span class="lbl">Mensual recurrente</span>
+            <span class="val" id="totalMonthly">$0/mes</span>
+          </div>
+          <a href="#contacto" class="btn btn-primary btn-block" id="requestQuoteBtn">Solicitar presupuesto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     CONTACTO
+     ========================================================================= -->
+<section id="contacto">
+  <div class="container contact-grid">
+    <div class="contact-side">
+      <span class="eyebrow-label">Contacto</span>
+      <h3 style="margin-top:10px;">Hablemos de tu proyecto</h3>
+      <p>Revisa el mensaje que armamos con tu selección, complétalo con tus datos y envíalo por WhatsApp o correo. Te respondemos en menos de 24 horas hábiles.</p>
+      <div class="contact-points">
+        <div class="contact-point">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span>WhatsApp: +502 5983 9777</span>
+        </div>
+        <div class="contact-point">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="2"/></svg>
+          <span>hola@apexmotion.com</span>
+        </div>
+        <div class="contact-point">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Lunes a viernes, 9:00–18:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-row">
+        <div class="field">
+          <label for="fName">Nombre</label>
+          <input type="text" id="fName" placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label for="fPhone">Teléfono / WhatsApp</label>
+          <input type="tel" id="fPhone" placeholder="+502 0000 0000">
+        </div>
+      </div>
+      <div class="field">
+        <label for="fEmail">Correo electrónico</label>
+        <input type="email" id="fEmail" placeholder="tucorreo@ejemplo.com">
+      </div>
+      <div class="field">
+        <label for="fMessage">Mensaje</label>
+        <textarea id="fMessage" rows="7"></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="sendWhatsapp">Solicitar por WhatsApp</button>
+        <button class="btn btn-outline" id="sendEmail">Enviar por correo</button>
+      </div>
+      <p class="form-note">Al enviar, se abrirá WhatsApp o tu cliente de correo con el mensaje ya redactado — no se envía nada automáticamente desde esta página.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     FOOTER
+     ========================================================================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="logo"><span class="logo-mark"></span>Apex Motion</a>
+        <p>Estudio de diseño y desarrollo web para negocios que quieren verse tan serios en línea como en la vida real.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>SECCIONES</h4>
+          <ul>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#planes">Planes</a></li>
+            <li><a href="#extras">Extras</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>LEGAL</h4>
+          <ul>
+            <li><a href="#">Términos de servicio</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="footerYear">© 2026 Apex Motion. Todos los derechos reservados.</span>
+      <span>Hecho con cuidado, bloque a bloque.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================================
+   CAMBIA AQUÍ TUS PRECIOS Y SERVICIOS
+   Toda la información de planes, extras y datos de contacto vive en este
+   bloque. Puedes agregar, quitar o modificar elementos de los arreglos
+   PLANS y EXTRAS sin tocar el resto del código: el resto de la página se
+   genera automáticamente a partir de estos datos.
+   ========================================================================= */
+
+// Símbolo de moneda usado en toda la página
+const CURRENCY = "$";
+
+// Número de WhatsApp de Apex Motion (formato internacional, solo dígitos)
+const WHATSAPP_NUMBER = "50259839777";
+
+// Correo de la agencia para el botón "Enviar por correo"
+const CONTACT_EMAIL = "hola@apexmotion.com";
+
+// --- PLANES / PRECIOS ---------------------------------------------------
+// id:        identificador único (sin espacios)
+// name:      nombre visible del plan
+// tagline:   una línea corta describiendo el plan
+// price:     precio base en números (sin símbolo de moneda)
+// featured:  true para destacar el plan con una insignia "Recomendado"
+// features:  lista de características que se muestran como checklist
+const PLANS = [
+  {
+    id: "basica",
+    name: "Web Básica",
+    tagline: "Presencia online simple y profesional para empezar.",
+    price: 350,
+    featured: false,
+    features: [
+      "Hasta 3 páginas (Inicio, Servicios, Contacto)",
+      "Diseño responsivo (móvil, tablet, escritorio)",
+      "Formulario de contacto",
+      "Entrega en 7–10 días hábiles"
+    ]
+  },
+  {
+    id: "profesional",
+    name: "Web Profesional",
+    tagline: "El plan más elegido: más páginas y mejor posicionamiento.",
+    price: 650,
+    featured: true,
+    features: [
+      "Hasta 8 páginas personalizadas",
+      "Diseño a medida de tu marca",
+      "Blog o sección de noticias",
+      "Optimización básica de velocidad",
+      "Entrega en 12–15 días hábiles"
+    ]
+  },
+  {
+    id: "tienda",
+    name: "Tienda Online",
+    tagline: "Vende tus productos con carrito de compras propio.",
+    price: 950,
+    featured: false,
+    features: [
+      "Catálogo de productos ilimitado",
+      "Carrito de compras y checkout",
+      "Panel para gestionar pedidos",
+      "Integración con pasarela de pagos*",
+      "Entrega en 18–22 días hábiles"
+    ]
+  }
+];
+
+// --- EXTRAS / COMPLEMENTOS ------------------------------------------------
+// id:         identificador único (sin espacios)
+// name:       nombre visible del extra
+// desc:       descripción corta
+// price:      costo del extra
+// recurring:  true si el cobro es mensual (se muestra por separado en el total)
+const EXTRAS = [
+  {
+    id: "dominio",
+    name: "Dominio y hosting (1 año)",
+    desc: "Incluye registro de dominio .com y hospedaje por 12 meses.",
+    price: 60,
+    recurring: false
+  },
+  {
+    id: "seo",
+    name: "SEO inicial",
+    desc: "Optimización on-page para aparecer mejor en buscadores.",
+    price: 80,
+    recurring: false
+  },
+  {
+    id: "pagos",
+    name: "Integración de pasarela de pagos",
+    desc: "Conexión con pasarela de pago para cobrar en línea.",
+    price: 120,
+    recurring: false
+  },
+  {
+    id: "logo",
+    name: "Diseño de logotipo",
+    desc: "Logotipo profesional con variantes de color.",
+    price: 70,
+    recurring: false
+  },
+  {
+    id: "contenido",
+    name: "Redacción de contenidos",
+    desc: "Textos profesionales para todas las páginas del sitio.",
+    price: 90,
+    recurring: false
+  },
+  {
+    id: "mantenimiento",
+    name: "Mantenimiento mensual",
+    desc: "Actualizaciones, copias de seguridad y soporte continuo.",
+    price: 40,
+    recurring: true
+  }
+];
+
+/* =========================================================================
+   A partir de aquí: lógica de la página. No necesitas tocar nada de lo
+   siguiente para cambiar precios o servicios.
+   ========================================================================= */
+
+const state = {
+  selectedPlan: null,   // id del plan elegido
+  selectedExtras: new Set()
+};
+
+const fmt = (n) => CURRENCY + n.toLocaleString("es-GT");
+
+// ---------- Render de planes ----------
+const plansGrid = document.getElementById("plansGrid");
+
+function renderPlans(){
+  plansGrid.innerHTML = PLANS.map(plan => `
+    <div class="plan-card ${plan.featured ? "is-featured" : ""}" data-plan-id="${plan.id}">
+      ${plan.featured ? '<span class="plan-badge">Recomendado</span>' : ""}
+      <h3 class="plan-name">${plan.name}</h3>
+      <p class="plan-tagline">${plan.tagline}</p>
+      <div class="plan-price">
+        <span class="amount">${fmt(plan.price)}</span>
+        <span class="unit">/ proyecto</span>
+      </div>
+      <ul class="plan-features">
+        ${plan.features.map(f => `
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>${f}</span>
+          </li>
+        `).join("")}
+      </ul>
+      <div class="plan-select">
+        <button class="btn btn-outline btn-block" data-select-plan="${plan.id}">Elegir ${plan.name}</button>
+      </div>
+    </div>
+  `).join("");
+
+  plansGrid.querySelectorAll("[data-select-plan]").forEach(btn => {
+    btn.addEventListener("click", () => selectPlan(btn.getAttribute("data-select-plan")));
+  });
+}
+
+function selectPlan(planId){
+  state.selectedPlan = planId;
+  document.querySelectorAll(".plan-card").forEach(card => {
+    const isSelected = card.getAttribute("data-plan-id") === planId;
+    card.classList.toggle("is-selected", isSelected);
+    const btn = card.querySelector("[data-select-plan]");
+    if(btn){
+      btn.textContent = isSelected ? "Plan seleccionado" : `Elegir ${PLANS.find(p => p.id === card.getAttribute("data-plan-id")).name}`;
+      btn.classList.toggle("btn-outline", !isSelected);
+      btn.classList.toggle("is-selected-state", isSelected);
+    }
+  });
+  updateSummary();
+  showToast("Plan seleccionado: " + PLANS.find(p => p.id === planId).name);
+}
+
+// ---------- Render de extras ----------
+const extrasGrid = document.getElementById("extrasGrid");
+
+function renderExtras(){
+  extrasGrid.innerHTML = EXTRAS.map(extra => `
+    <label class="extra-card" data-extra-id="${extra.id}">
+      <input type="checkbox" data-extra-checkbox="${extra.id}">
+      <span class="extra-checkbox">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="extra-info">
+        <span class="extra-name">${extra.name}</span>
+        <span class="extra-desc">${extra.desc}</span>
+      </span>
+      <span class="extra-price">${fmt(extra.price)}${extra.recurring ? '<br><small>por mes</small>' : ""}</span>
+    </label>
+  `).join("");
+
+  extrasGrid.querySelectorAll(".extra-card").forEach(card => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleExtra(card.getAttribute("data-extra-id"), card);
+    });
+  });
+}
+
+function toggleExtra(extraId, card){
+  const checkbox = card.querySelector("input[type=checkbox]");
+  if(state.selectedExtras.has(extraId)){
+    state.selectedExtras.delete(extraId);
+    checkbox.checked = false;
+    card.classList.remove("is-checked");
+  } else {
+    state.selectedExtras.add(extraId);
+    checkbox.checked = true;
+    card.classList.add("is-checked");
+  }
+  updateSummary();
+}
+
+// ---------- Resumen dinámico ----------
+const summaryLines = document.getElementById("summary-lines");
+const totalOnceEl = document.getElementById("totalOnce");
+const totalMonthlyEl = document.getElementById("totalMonthly");
+const totalMonthlyRow = document.getElementById("totalMonthlyRow");
+
+function updateSummary(){
+  const plan = PLANS.find(p => p.id === state.selectedPlan);
+  const extras = EXTRAS.filter(e => state.selectedExtras.has(e.id));
+
+  if(!plan){
+    summaryLines.innerHTML = `<p class="summary-empty">Elige un plan arriba para comenzar tu resumen.</p>`;
+    totalOnceEl.textContent = fmt(0);
+    totalMonthlyRow.style.display = "none";
+    return;
+  }
+
+  let lines = `
+    <div class="summary-line">
+      <span class="lbl">Plan: ${plan.name}</span>
+      <span class="val">${fmt(plan.price)}</span>
+    </div>
+  `;
+
+  extras.forEach(extra => {
+    lines += `
+      <div class="summary-line">
+        <span class="lbl">+ ${extra.name}${extra.recurring ? " (mensual)" : ""}</span>
+        <span class="val">${fmt(extra.price)}${extra.recurring ? "/mes" : ""}</span>
+      </div>
+    `;
+  });
+
+  summaryLines.innerHTML = lines;
+
+  const once = plan.price + extras.filter(e => !e.recurring).reduce((sum, e) => sum + e.price, 0);
+  const monthly = extras.filter(e => e.recurring).reduce((sum, e) => sum + e.price, 0);
+
+  totalOnceEl.textContent = fmt(once);
+  if(monthly > 0){
+    totalMonthlyRow.style.display = "flex";
+    totalMonthlyEl.textContent = fmt(monthly) + "/mes";
+  } else {
+    totalMonthlyRow.style.display = "none";
+  }
+
+  updateMessageField();
+}
+
+// ---------- Construcción del mensaje de cotización ----------
+function buildQuoteMessage(){
+  const plan = PLANS.find(p => p.id === state.selectedPlan);
+  const extras = EXTRAS.filter(e => state.selectedExtras.has(e.id));
+  const name = document.getElementById("fName").value.trim();
+
+  if(!plan){
+    return "Hola, me gustaría recibir información sobre los planes de diseño y desarrollo web de Apex Motion.";
+  }
+
+  const once = plan.price + extras.filter(e => !e.recurring).reduce((sum, e) => sum + e.price, 0);
+  const monthly = extras.filter(e => e.recurring).reduce((sum, e) => sum + e.price, 0);
+
+  let msg = `Hola Apex Motion, soy ${name || "[tu nombre]"}. Quisiera solicitar un presupuesto con la siguiente selección:\n\n`;
+  msg += `Plan: ${plan.name} (${fmt(plan.price)})\n`;
+
+  if(extras.length){
+    msg += `Extras:\n`;
+    extras.forEach(e => {
+      msg += `- ${e.name}: ${fmt(e.price)}${e.recurring ? "/mes" : ""}\n`;
+    });
+  }
+
+  msg += `\nTotal pago único: ${fmt(once)}`;
+  if(monthly > 0) msg += `\nTotal mensual recurrente: ${fmt(monthly)}/mes`;
+  msg += `\n\n¿Podrían confirmarme disponibilidad y tiempos de entrega?`;
+
+  return msg;
+}
+
+function updateMessageField(){
+  document.getElementById("fMessage").value = buildQuoteMessage();
+}
+
+// ---------- Envío por WhatsApp / correo ----------
+document.getElementById("sendWhatsapp").addEventListener("click", () => {
+  const message = document.getElementById("fMessage").value || buildQuoteMessage();
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+});
+
+document.getElementById("sendEmail").addEventListener("click", () => {
+  const message = document.getElementById("fMessage").value || buildQuoteMessage();
+  const subject = "Solicitud de presupuesto — sitio web";
+  const url = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  window.location.href = url;
+});
+
+document.getElementById("requestQuoteBtn").addEventListener("click", () => {
+  updateMessageField();
+});
+
+// ---------- Menú móvil ----------
+const navToggle = document.getElementById("navToggle");
+const mobilePanel = document.getElementById("mobilePanel");
+navToggle.addEventListener("click", () => {
+  const isOpen = mobilePanel.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+});
+mobilePanel.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    mobilePanel.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  });
+});
+
+// ---------- Toast de confirmación ----------
+let toastTimer;
+function showToast(text){
+  const toast = document.getElementById("toast");
+  toast.textContent = text;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+}
+
+// ---------- Año del footer ----------
+document.getElementById("footerYear").textContent =
+  `© ${new Date().getFullYear()} Apex Motion. Todos los derechos reservados.`;
+
+// ---------- Inicialización ----------
+renderPlans();
+renderExtras();
+updateSummary();
+</script>
+</body>
+</html>
