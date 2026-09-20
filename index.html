@@ -6,7 +6,7 @@
 <title>Apex Motion — Diseño y desarrollo web</title>
 <meta name="description" content="Apex Motion diseña y construye tu sitio web, bloque a bloque. Planes claros, extras a la medida y presupuesto al instante por WhatsApp.">
 
-<!-- Tipografías: puedes quitar este link y usar solo fuentes del sistema si prefieres no depender de internet -->
+<!-- Tipografías -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -14,41 +14,29 @@
 <style>
 /* =========================================================================
    VARIABLES DE PERSONALIZACIÓN
-   Cambia aquí colores, tipografías, radios de borde y sombras. Todo el
-   documento usa estas variables, así que un cambio aquí se aplica a
-   toda la página. Paleta oficial de Apex Motion.
    ========================================================================= */
 html{ scroll-behavior: smooth; }
 
 :root{
-  /* --- Paleta oficial Apex Motion (Coolors) --- */
-  --primary-color:   #000000;  /* Color principal: fondo oscuro principal / texto */
-  --secondary-color: #14213d;  /* Color secundario: tarjetas, secciones secundarias, contenedores */
-  --accent-color:    #0a9396;  /* Accent: botones principales, íconos y destacados */
-  --bg-color:        #001219;  /* Fondo general de la página */
+  --primary-color:    #000000;
+  --secondary-color: #14213d;
+  --accent-color:    #0a9396;
+  --bg-color:        #001219;
 
-  /* Variantes derivadas del accent, para hover y detalles claros */
   --accent-color-dark:  #07686a;
   --accent-color-light: #3fb6b8;
 
-  /* --- Texto: siempre blanco o gris claro sobre estos fondos oscuros --- */
   --text-strong: #ffffff;
   --text-soft:   #e5e5e5;
   --text-muted:  rgba(229,229,229,.62);
 
-  /* --- Bordes y líneas sobre fondo oscuro --- */
   --color-line: rgba(255,255,255,.12);
   --color-line-soft: rgba(255,255,255,.08);
 
-  /* --- Tipografías ---
-     font-family: usa esta para cuerpo de texto general.
-     font-family-display: usa esta para titulares grandes.
-     font-family-mono: usa esta para precios y etiquetas tipo "ficha técnica". */
   --font-family:         'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-family-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --font-family-mono:    'JetBrains Mono', ui-monospace, 'Courier New', monospace;
 
-  /* --- Geometría --- */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 24px;
@@ -294,7 +282,6 @@ section{ padding: 92px 0; }
   color: var(--text-muted);
 }
 
-/* Mockup de navegador con bloques que se ensamblan */
 .browser-mock{
   background: var(--secondary-color);
   border-radius: var(--radius-lg);
@@ -356,7 +343,7 @@ section{ padding: 92px 0; }
 }
 
 /* =========================================================================
-   SERVICIOS / CÓMO TRABAJAMOS
+   SERVICIOS
    ========================================================================= */
 #servicios{ background: var(--primary-color); }
 .steps-grid{
@@ -381,7 +368,7 @@ section{ padding: 92px 0; }
 }
 
 /* =========================================================================
-   PLANES / PRECIOS
+   PLANES
    ========================================================================= */
 #planes{ border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
 .plans-grid{
@@ -524,7 +511,7 @@ section{ padding: 92px 0; }
 }
 
 /* =========================================================================
-   RESUMEN DEL PEDIDO
+   RESUMEN
    ========================================================================= */
 .summary-wrap{
   display:grid;
@@ -591,7 +578,7 @@ section{ padding: 92px 0; }
 }
 
 /* =========================================================================
-   CONTACTO / COTIZACIÓN
+   CONTACTO
    ========================================================================= */
 #contacto{ background: var(--primary-color); border-top: 1px solid var(--color-line); }
 .contact-grid{
@@ -698,7 +685,6 @@ section{ padding: 92px 0; }
   color: var(--text-muted);
 }
 
-/* Toast de confirmación */
 #toast{
   position: fixed;
   bottom: 24px;
@@ -721,9 +707,6 @@ section{ padding: 92px 0; }
 </head>
 <body>
 
-<!-- =========================================================================
-     HEADER
-     ========================================================================= -->
 <header class="site-header">
   <div class="container nav">
     <a href="#top" class="logo"><span class="logo-mark"></span>Apex Motion</a>
@@ -751,9 +734,6 @@ section{ padding: 92px 0; }
   </div>
 </header>
 
-<!-- =========================================================================
-     HERO
-     ========================================================================= -->
 <div id="top"></div>
 <section class="hero">
   <div class="container hero-grid">
@@ -792,9 +772,6 @@ section{ padding: 92px 0; }
   </div>
 </section>
 
-<!-- =========================================================================
-     SERVICIOS / CÓMO TRABAJAMOS
-     ========================================================================= -->
 <section id="servicios">
   <div class="container">
     <div class="section-head">
@@ -823,9 +800,6 @@ section{ padding: 92px 0; }
   </div>
 </section>
 
-<!-- =========================================================================
-     PLANES
-     ========================================================================= -->
 <section id="planes">
   <div class="container">
     <div class="section-head">
@@ -833,13 +807,10 @@ section{ padding: 92px 0; }
       <h2>Elige el punto de partida para tu proyecto</h2>
       <p>Precios base claros. Después puedes sumar los extras que tu proyecto necesite y ver el total al instante.</p>
     </div>
-    <div class="plans-grid" id="plansGrid"><!-- Generado por JavaScript a partir de PLANS --></div>
+    <div class="plans-grid" id="plansGrid"></div>
   </div>
 </section>
 
-<!-- =========================================================================
-     EXTRAS + RESUMEN
-     ========================================================================= -->
 <section id="extras">
   <div class="container">
     <div class="section-head">
@@ -848,7 +819,7 @@ section{ padding: 92px 0; }
       <p>Marca los extras que quieras incluir. El resumen de abajo se actualiza solo, con el total en tiempo real.</p>
     </div>
 
-    <div class="extras-grid" id="extrasGrid"><!-- Generado por JavaScript a partir de EXTRAS --></div>
+    <div class="extras-grid" id="extrasGrid"></div>
 
     <div class="summary-wrap">
       <div class="summary-card">
@@ -874,9 +845,6 @@ section{ padding: 92px 0; }
   </div>
 </section>
 
-<!-- =========================================================================
-     CONTACTO
-     ========================================================================= -->
 <section id="contacto">
   <div class="container contact-grid">
     <div class="contact-side">
@@ -927,9 +895,6 @@ section{ padding: 92px 0; }
   </div>
 </section>
 
-<!-- =========================================================================
-     FOOTER
-     ========================================================================= -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
@@ -966,30 +931,10 @@ section{ padding: 92px 0; }
 <div id="toast"></div>
 
 <script>
-/* =========================================================================
-   CAMBIA AQUÍ TUS PRECIOS Y SERVICIOS
-   Toda la información de planes, extras y datos de contacto vive en este
-   bloque. Puedes agregar, quitar o modificar elementos de los arreglos
-   PLANS y EXTRAS sin tocar el resto del código: el resto de la página se
-   genera automáticamente a partir de estos datos.
-   ========================================================================= */
-
-// Símbolo de moneda usado en toda la página
 const CURRENCY = "$";
-
-// Número de WhatsApp de Apex Motion (formato internacional, solo dígitos)
 const WHATSAPP_NUMBER = "50259839777";
-
-// Correo de la agencia para el botón "Enviar por correo"
 const CONTACT_EMAIL = "hola@apexmotion.com";
 
-// --- PLANES / PRECIOS ---------------------------------------------------
-// id:        identificador único (sin espacios)
-// name:      nombre visible del plan
-// tagline:   una línea corta describiendo el plan
-// price:     precio base en números (sin símbolo de moneda)
-// featured:  true para destacar el plan con una insignia "Recomendado"
-// features:  lista de características que se muestran como checklist
 const PLANS = [
   {
     id: "basica",
@@ -1011,313 +956,259 @@ const PLANS = [
     price: 650,
     featured: true,
     features: [
-      "Hasta 8 páginas personalizadas",
-      "Diseño a medida de tu marca",
-      "Blog o sección de noticias",
-      "Optimización básica de velocidad",
-      "Entrega en 12–15 días hábiles"
+      "Hasta 8 páginas",
+      "Diseño responsive premium y personalizado",
+      "Optimización SEO básica incluida",
+      "Integración con Blog / Noticias",
+      "Entrega en 10–15 días hábiles"
     ]
   },
   {
-    id: "tienda",
-    name: "Tienda Online",
-    tagline: "Vende tus productos con carrito de compras propio.",
-    price: 950,
+    id: "ecommerce",
+    name: "E-Commerce",
+    tagline: "Vende tus productos o servicios en línea de forma segura.",
+    price: 1200,
     featured: false,
     features: [
-      "Catálogo de productos ilimitado",
-      "Carrito de compras y checkout",
-      "Panel para gestionar pedidos",
-      "Integración con pasarela de pagos*",
-      "Entrega en 18–22 días hábiles"
+      "Tienda online completa con pasarela de pago",
+      "Carga inicial de hasta 20 productos",
+      "Gestión de inventario y pedidos",
+      "Capacitación de uso de la plataforma",
+      "Entrega en 15–20 días hábiles"
     ]
   }
 ];
 
-// --- EXTRAS / COMPLEMENTOS ------------------------------------------------
-// id:         identificador único (sin espacios)
-// name:       nombre visible del extra
-// desc:       descripción corta
-// price:      costo del extra
-// recurring:  true si el cobro es mensual (se muestra por separado en el total)
 const EXTRAS = [
   {
-    id: "dominio",
-    name: "Dominio y hosting (1 año)",
-    desc: "Incluye registro de dominio .com y hospedaje por 12 meses.",
-    price: 60,
-    recurring: false
-  },
-  {
-    id: "seo",
-    name: "SEO inicial",
-    desc: "Optimización on-page para aparecer mejor en buscadores.",
-    price: 80,
-    recurring: false
-  },
-  {
-    id: "pagos",
-    name: "Integración de pasarela de pagos",
-    desc: "Conexión con pasarela de pago para cobrar en línea.",
-    price: 120,
-    recurring: false
-  },
-  {
-    id: "logo",
-    name: "Diseño de logotipo",
-    desc: "Logotipo profesional con variantes de color.",
-    price: 70,
-    recurring: false
-  },
-  {
-    id: "contenido",
-    name: "Redacción de contenidos",
-    desc: "Textos profesionales para todas las páginas del sitio.",
-    price: 90,
-    recurring: false
+    id: "seo_adv",
+    name: "SEO Avanzado",
+    desc: "Optimización técnica y de contenido para posicionar en Google.",
+    price: 200,
+    type: "once"
   },
   {
     id: "mantenimiento",
-    name: "Mantenimiento mensual",
-    desc: "Actualizaciones, copias de seguridad y soporte continuo.",
-    price: 40,
-    recurring: true
+    name: "Mantenimiento Mensual",
+    desc: "Actualizaciones de seguridad, copias de seguridad y cambios menores.",
+    price: 45,
+    type: "monthly"
+  },
+  {
+    id: "multi_idioma",
+    name: "Soporte Multi-idioma",
+    desc: "Estructura para traducir tu web a 2 o más idiomas.",
+    price: 150,
+    type: "once"
+  },
+  {
+    id: "copywriting",
+    name: "Redacción de Contenido",
+    desc: "Creación de textos persuasivos orientados a la conversión.",
+    price: 180,
+    type: "once"
   }
 ];
 
-/* =========================================================================
-   A partir de aquí: lógica de la página. No necesitas tocar nada de lo
-   siguiente para cambiar precios o servicios.
-   ========================================================================= */
+// Estado de la cotización
+let selectedPlanId = "profesional"; 
+let selectedExtras = new Set();
 
-const state = {
-  selectedPlan: null,   // id del plan elegido
-  selectedExtras: new Set()
-};
-
-const fmt = (n) => CURRENCY + n.toLocaleString("es-GT");
-
-// ---------- Render de planes ----------
-const plansGrid = document.getElementById("plansGrid");
-
-function renderPlans(){
-  plansGrid.innerHTML = PLANS.map(plan => `
-    <div class="plan-card ${plan.featured ? "is-featured" : ""}" data-plan-id="${plan.id}">
-      ${plan.featured ? '<span class="plan-badge">Recomendado</span>' : ""}
-      <h3 class="plan-name">${plan.name}</h3>
-      <p class="plan-tagline">${plan.tagline}</p>
-      <div class="plan-price">
-        <span class="amount">${fmt(plan.price)}</span>
-        <span class="unit">/ proyecto</span>
-      </div>
-      <ul class="plan-features">
-        ${plan.features.map(f => `
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>${f}</span>
-          </li>
-        `).join("")}
-      </ul>
-      <div class="plan-select">
-        <button class="btn btn-outline btn-block" data-select-plan="${plan.id}">Elegir ${plan.name}</button>
-      </div>
-    </div>
-  `).join("");
-
-  plansGrid.querySelectorAll("[data-select-plan]").forEach(btn => {
-    btn.addEventListener("click", () => selectPlan(btn.getAttribute("data-select-plan")));
-  });
-}
-
-function selectPlan(planId){
-  state.selectedPlan = planId;
-  document.querySelectorAll(".plan-card").forEach(card => {
-    const isSelected = card.getAttribute("data-plan-id") === planId;
-    card.classList.toggle("is-selected", isSelected);
-    const btn = card.querySelector("[data-select-plan]");
-    if(btn){
-      btn.textContent = isSelected ? "Plan seleccionado" : `Elegir ${PLANS.find(p => p.id === card.getAttribute("data-plan-id")).name}`;
-      btn.classList.toggle("btn-outline", !isSelected);
-      btn.classList.toggle("is-selected-state", isSelected);
-    }
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  renderPlans();
+  renderExtras();
   updateSummary();
-  showToast("Plan seleccionado: " + PLANS.find(p => p.id === planId).name);
-}
 
-// ---------- Render de extras ----------
-const extrasGrid = document.getElementById("extrasGrid");
-
-function renderExtras(){
-  extrasGrid.innerHTML = EXTRAS.map(extra => `
-    <label class="extra-card" data-extra-id="${extra.id}">
-      <input type="checkbox" data-extra-checkbox="${extra.id}">
-      <span class="extra-checkbox">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-      <span class="extra-info">
-        <span class="extra-name">${extra.name}</span>
-        <span class="extra-desc">${extra.desc}</span>
-      </span>
-      <span class="extra-price">${fmt(extra.price)}${extra.recurring ? '<br><small>por mes</small>' : ""}</span>
-    </label>
-  `).join("");
-
-  extrasGrid.querySelectorAll(".extra-card").forEach(card => {
-    card.addEventListener("click", (e) => {
-      e.preventDefault();
-      toggleExtra(card.getAttribute("data-extra-id"), card);
-    });
+  // Menú Móvil Toggle
+  const navToggle = document.getElementById("navToggle");
+  const mobilePanel = document.getElementById("mobilePanel");
+  navToggle.addEventListener("click", () => {
+    const open = mobilePanel.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", open);
   });
-}
 
-function toggleExtra(extraId, card){
-  const checkbox = card.querySelector("input[type=checkbox]");
-  if(state.selectedExtras.has(extraId)){
-    state.selectedExtras.delete(extraId);
-    checkbox.checked = false;
-    card.classList.remove("is-checked");
-  } else {
-    state.selectedExtras.add(extraId);
-    checkbox.checked = true;
-    card.classList.add("is-checked");
-  }
-  updateSummary();
-}
+  // Eventos de envío
+  document.getElementById("sendWhatsapp").addEventListener("click", sendViaWhatsapp);
+  document.getElementById("sendEmail").addEventListener("click", sendViaEmail);
+});
 
-// ---------- Resumen dinámico ----------
-const summaryLines = document.getElementById("summary-lines");
-const totalOnceEl = document.getElementById("totalOnce");
-const totalMonthlyEl = document.getElementById("totalMonthly");
-const totalMonthlyRow = document.getElementById("totalMonthlyRow");
-
-function updateSummary(){
-  const plan = PLANS.find(p => p.id === state.selectedPlan);
-  const extras = EXTRAS.filter(e => state.selectedExtras.has(e.id));
-
-  if(!plan){
-    summaryLines.innerHTML = `<p class="summary-empty">Elige un plan arriba para comenzar tu resumen.</p>`;
-    totalOnceEl.textContent = fmt(0);
-    totalMonthlyRow.style.display = "none";
-    return;
-  }
-
-  let lines = `
-    <div class="summary-line">
-      <span class="lbl">Plan: ${plan.name}</span>
-      <span class="val">${fmt(plan.price)}</span>
-    </div>
-  `;
-
-  extras.forEach(extra => {
-    lines += `
-      <div class="summary-line">
-        <span class="lbl">+ ${extra.name}${extra.recurring ? " (mensual)" : ""}</span>
-        <span class="val">${fmt(extra.price)}${extra.recurring ? "/mes" : ""}</span>
+function renderPlans() {
+  const container = document.getElementById("plansGrid");
+  container.innerHTML = PLANS.map(plan => {
+    const isSelected = plan.id === selectedPlanId;
+    return `
+      <div class="plan-card ${plan.featured ? 'is-featured' : ''} ${isSelected ? 'is-selected' : ''}" id="card-plan-${plan.id}">
+        ${plan.featured ? '<div class="plan-badge">Recomendado</div>' : ''}
+        <h3 class="plan-name">${plan.name}</h3>
+        <p class="plan-tagline">${plan.tagline}</p>
+        <div class="plan-price">
+          <span class="amount">${CURRENCY}${plan.price}</span>
+          <span class="unit">pago único</span>
+        </div>
+        <ul class="plan-features">
+          ${plan.features.map(f => `
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>${f}</span>
+            </li>
+          `).join('')}
+        </ul>
+        <div class="plan-select">
+          <button class="btn ${isSelected ? 'btn-primary is-selected-state' : 'btn-outline'} btn-block" onclick="selectPlan('${plan.id}')">
+            ${isSelected ? 'Seleccionado' : 'Elegir plan'}
+          </button>
+        </div>
       </div>
     `;
+  }).join('');
+}
+
+function selectPlan(id) {
+  selectedPlanId = id;
+  renderPlans();
+  updateSummary();
+}
+
+function renderExtras() {
+  const container = document.getElementById("extrasGrid");
+  container.innerHTML = EXTRAS.map(extra => {
+    const isChecked = selectedExtras.has(extra.id);
+    return `
+      <label class="extra-card ${isChecked ? 'is-checked' : ''}" id="extra-card-${extra.id}">
+        <input type="checkbox" onchange="toggleExtra('${extra.id}')" ${isChecked ? 'checked' : ''}>
+        <div class="extra-checkbox">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="extra-info">
+          <div class="extra-name">${extra.name}</div>
+          <div class="extra-desc">${extra.desc}</div>
+        </div>
+        <div class="extra-price">
+          +${CURRENCY}${extra.price}
+          <small>${extra.type === 'monthly' ? '/mes' : ''}</small>
+        </div>
+      </label>
+    `;
+  }).join('');
+}
+
+function toggleExtra(id) {
+  if (selectedExtras.has(id)) {
+    selectedExtras.delete(id);
+  } else {
+    selectedExtras.add(id);
+  }
+  renderExtras();
+  updateSummary();
+}
+
+function updateSummary() {
+  const linesContainer = document.getElementById("summary-lines");
+  const totalOnceEl = document.getElementById("totalOnce");
+  const totalMonthlyEl = document.getElementById("totalMonthly");
+  const totalMonthlyRow = document.getElementById("totalMonthlyRow");
+
+  let totalOnce = 0;
+  let totalMonthly = 0;
+  let linesHtml = "";
+
+  const currentPlan = PLANS.find(p => p.id === selectedPlanId);
+  if (currentPlan) {
+    totalOnce += currentPlan.price;
+    linesHtml += `
+      <div class="summary-line">
+        <span class="lbl">${currentPlan.name}</span>
+        <span class="val">${CURRENCY}${currentPlan.price}</span>
+      </div>
+    `;
+  }
+
+  selectedExtras.forEach(extraId => {
+    const extra = EXTRAS.find(e => e.id === extraId);
+    if (extra) {
+      if (extra.type === 'monthly') {
+        totalMonthly += extra.price;
+      } else {
+        totalOnce += extra.price;
+      }
+      linesHtml += `
+        <div class="summary-line">
+          <span class="lbl">+ ${extra.name}</span>
+          <span class="val">${CURRENCY}${extra.price}${extra.type === 'monthly' ? '/mes' : ''}</span>
+        </div>
+      `;
+    }
   });
 
-  summaryLines.innerHTML = lines;
+  linesContainer.innerHTML = linesHtml || '<p class="summary-empty">Elige un plan arriba para comenzar tu resumen.</p>';
+  totalOnceEl.textContent = `${CURRENCY}${totalOnce}`;
 
-  const once = plan.price + extras.filter(e => !e.recurring).reduce((sum, e) => sum + e.price, 0);
-  const monthly = extras.filter(e => e.recurring).reduce((sum, e) => sum + e.price, 0);
-
-  totalOnceEl.textContent = fmt(once);
-  if(monthly > 0){
+  if (totalMonthly > 0) {
+    totalMonthlyEl.textContent = `${CURRENCY}${totalMonthly}/mes`;
     totalMonthlyRow.style.display = "flex";
-    totalMonthlyEl.textContent = fmt(monthly) + "/mes";
   } else {
     totalMonthlyRow.style.display = "none";
   }
 
-  updateMessageField();
+  updateMessageField(currentPlan, totalOnce, totalMonthly);
 }
 
-// ---------- Construcción del mensaje de cotización ----------
-function buildQuoteMessage(){
-  const plan = PLANS.find(p => p.id === state.selectedPlan);
-  const extras = EXTRAS.filter(e => state.selectedExtras.has(e.id));
-  const name = document.getElementById("fName").value.trim();
-
-  if(!plan){
-    return "Hola, me gustaría recibir información sobre los planes de diseño y desarrollo web de Apex Motion.";
+function updateMessageField(plan, totalOnce, totalMonthly) {
+  const fMessage = document.getElementById("fMessage");
+  let msg = `Hola Apex Motion,\n\nMe gustaría solicitar información/presupuesto para mi proyecto con los siguientes detalles:\n\n`;
+  if (plan) {
+    msg += `• Plan seleccionado: ${plan.name} (${CURRENCY}${plan.price})\n`;
   }
-
-  const once = plan.price + extras.filter(e => !e.recurring).reduce((sum, e) => sum + e.price, 0);
-  const monthly = extras.filter(e => e.recurring).reduce((sum, e) => sum + e.price, 0);
-
-  let msg = `Hola Apex Motion, soy ${name || "[tu nombre]"}. Quisiera solicitar un presupuesto con la siguiente selección:\n\n`;
-  msg += `Plan: ${plan.name} (${fmt(plan.price)})\n`;
-
-  if(extras.length){
-    msg += `Extras:\n`;
-    extras.forEach(e => {
-      msg += `- ${e.name}: ${fmt(e.price)}${e.recurring ? "/mes" : ""}\n`;
+  if (selectedExtras.size > 0) {
+    msg += `• Extras incluidos:\n`;
+    selectedExtras.forEach(eId => {
+      const ex = EXTRAS.find(e => e.id === eId);
+      if (ex) msg += `  - ${ex.name} (+${CURRENCY}${ex.price}${ex.type === 'monthly' ? '/mes' : ''})\n`;
     });
   }
+  msg += `\nTotal estimado pago único: ${CURRENCY}${totalOnce}`;
+  if (totalMonthly > 0) msg += `\nTotal estimado mensual: ${CURRENCY}${totalMonthly}/mes`;
+  msg += `\n\nQuedo a la espera de sus comentarios.`;
 
-  msg += `\nTotal pago único: ${fmt(once)}`;
-  if(monthly > 0) msg += `\nTotal mensual recurrente: ${fmt(monthly)}/mes`;
-  msg += `\n\n¿Podrían confirmarme disponibilidad y tiempos de entrega?`;
-
-  return msg;
+  fMessage.value = msg;
 }
 
-function updateMessageField(){
-  document.getElementById("fMessage").value = buildQuoteMessage();
+function sendViaWhatsapp() {
+  const name = document.getElementById("fName").value.trim();
+  const phone = document.getElementById("fPhone").value.trim();
+  const email = document.getElementById("fEmail").value.trim();
+  const message = document.getElementById("fMessage").value;
+
+  let text = message;
+  if (name || phone || email) {
+    text = `*Datos del Cliente:*\n` +
+           (name ? `Nombre: ${name}\n` : '') +
+           (phone ? `Teléfono: ${phone}\n` : '') +
+           (email ? `Correo: ${email}\n` : '') +
+           `-----------------------------\n` + message;
+  }
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+  showToast("Abriendo WhatsApp...");
 }
 
-// ---------- Envío por WhatsApp / correo ----------
-document.getElementById("sendWhatsapp").addEventListener("click", () => {
-  const message = document.getElementById("fMessage").value || buildQuoteMessage();
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
-});
+function sendViaEmail() {
+  const name = document.getElementById("fName").value.trim();
+  const message = document.getElementById("fMessage").value;
 
-document.getElementById("sendEmail").addEventListener("click", () => {
-  const message = document.getElementById("fMessage").value || buildQuoteMessage();
-  const subject = "Solicitud de presupuesto — sitio web";
-  const url = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-  window.location.href = url;
-});
+  const subject = `Presupuesto Web - ${name || 'Cliente Apex Motion'}`;
+  const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+  window.location.href = mailtoUrl;
+  showToast("Abriendo tu cliente de correo...");
+}
 
-document.getElementById("requestQuoteBtn").addEventListener("click", () => {
-  updateMessageField();
-});
-
-// ---------- Menú móvil ----------
-const navToggle = document.getElementById("navToggle");
-const mobilePanel = document.getElementById("mobilePanel");
-navToggle.addEventListener("click", () => {
-  const isOpen = mobilePanel.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-});
-mobilePanel.querySelectorAll("a").forEach(a => {
-  a.addEventListener("click", () => {
-    mobilePanel.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-  });
-});
-
-// ---------- Toast de confirmación ----------
-let toastTimer;
-function showToast(text){
+function showToast(msg) {
   const toast = document.getElementById("toast");
-  toast.textContent = text;
+  toast.textContent = msg;
   toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+  setTimeout(() => toast.classList.remove("show"), 3000);
 }
-
-// ---------- Año del footer ----------
-document.getElementById("footerYear").textContent =
-  `© ${new Date().getFullYear()} Apex Motion. Todos los derechos reservados.`;
-
-// ---------- Inicialización ----------
-renderPlans();
-renderExtras();
-updateSummary();
 </script>
 </body>
 </html>
